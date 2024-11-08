@@ -1,0 +1,43 @@
+﻿ @model IEnumerable<SeoulWEBSession3.Models.PropertyViewModel.PropertyViewModel>
+
+     <div class="container">
+         <header class="d-flex justify-content-between align-items-center mb-4">
+             <img src="/images/logo.png" alt="Logo" class="logo" style="height: 50px;" />
+
+             <form asp-action="Index" method="get" class="search-form">
+                 <input type="text" name="searchTerm" id="searchInput" class="search-form"
+                 placeholder="Search by area or title..." aria-label="Search area"
+                 value="@ViewData["SearchTerm"]"/>
+                 <button type="submit" class="search-btn">Search</button>
+
+             </form>
+
+
+             <div class="welcome-message">
+                 Welcome @ViewData["UserFullName"]
+             </div>
+         </header>
+
+         <h2>Property Listing</h2>
+
+         <div class="row mt-4" id="PropertyResult">
+        @foreach (var property in Model)
+        {
+            <div class="col-md-3 mb-4">
+                <a asp-controller="Properties" asp-action="Details" asp-route-id="@property.Id">
+                    <div class="card">
+                        <img class="card-img-top" src="/images/@property.ImageUrl" alt="Property Image" style="height: 200px; object-fit:cover;" />
+                        <div class="card-body">
+                            <h5 class="card-title">@property.Title</h5>
+                            <p class="card-text">Area: @property.Area</p>
+                            <p class="card-text">Capacity: @property.Capacity</p>
+                            <p class="card-text">Total price: $90</p>
+
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        }
+    </div>
+     </div>
